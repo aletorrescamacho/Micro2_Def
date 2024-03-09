@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup  } from "firebase/auth";
 import { auth } from "../../firebase";
 import { db } from "../../firebase";
 import {doc, setDoc} from "firebase/firestore";
@@ -53,6 +53,34 @@ const SignUp  = () => {
         e.preventDefault();
         handleSubmit(name,lastname,username,email,password,vjp)
     }
+
+    const registerWithGoogle = async () => {
+        try {
+          const provider = new GoogleAuthProvider();
+          const result = await signInWithPopup(auth, provider);
+          const user = result.user;
+          console.log(user); 
+          const uid = user.uid;
+          const nombre = user.displayName;
+          const email = user.email;
+          const apellido = "";
+          const username = user.displayName;
+          const vjp = "";
+          const usuariosRef = doc(db, "usuarios", uid);
+          await setDoc(usuariosRef, {
+          nombre,
+          apellido,
+          username,
+          email,
+          vjp,
+          suscripciones: [],
+          });
+          window.location.href = "/home"; 
+
+        } catch (error) {
+          console.log(error);
+        }
+      };
     
     return (
         <div className = "sign-up-container">
@@ -80,6 +108,9 @@ const SignUp  = () => {
                 <br></br>
                 <button type = "submit">Regístrate</button>
             </form>
+            <br></br>
+            <label htmlFor = "registroConGoogle">Regístrate con Google.</label>
+            <button onClick={registerWithGoogle}>Regístrate con Google</button>
         </div>
     );
 };

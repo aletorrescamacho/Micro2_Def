@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase";
 
 const SignIn  = () => {
@@ -16,6 +16,19 @@ const SignIn  = () => {
             window.alert("Error. Opciones: 1)Correo no registrado. 2)Contraseña inválida.");
         });
     }
+
+    const signInWithGoogle = async () => {
+        try {
+          const provider = new GoogleAuthProvider();
+          const result = await signInWithPopup(auth, provider);
+          const user = result.user;
+          console.log(user); 
+      
+          window.location.href = "/home"; 
+        } catch (error) {
+          console.log(error);
+        }
+      };
     
     return (
         <div className = "sign-in-container">
@@ -27,6 +40,9 @@ const SignIn  = () => {
                 <br></br>
                 <button type = "submit">Inicia Sesión</button>
             </form>
+            <br></br>
+            <label htmlFor = "sesionConGoogle">Inicia Sesión con Google.</label>
+            <button onClick={signInWithGoogle}>Inicia Sesión con Google</button>
         </div>
     );
 };
