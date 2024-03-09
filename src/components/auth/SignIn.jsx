@@ -8,11 +8,12 @@ const SignIn  = () => {
     const [password, setPassword] = useState('');
     const signIn = (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
+        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             console.log(userCredential)
+            window.location.href = "/home";
         }).catch((error) => {
             console.log(error)
+            window.alert("Error. Opciones: 1)Correo no registrado. 2)Contraseña inválida.");
         });
     }
     
