@@ -31,3 +31,21 @@ body{
     background-color:#663399;
     transition: 0.7s;
 }
+
+.ca{
+    background-color:  #663399;
+    width: 18rem;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+}
+
+.barra-Busqueda{
+    margin-top: 9rem;
+}
+
+.tit-bus, .p-bus{
+    color: white;
+}
