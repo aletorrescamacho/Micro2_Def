@@ -1,0 +1,28 @@
+body{
+    background-color: #1B263B;
+}
+
+.img{
+    height: 103px;
+    left: 2px;
+    top:20px;
+    position: absolute;
+    top: 0;
+    width: 255px
+}
+
+.BotonPerfil {
+    padding: 10px 20px;
+    background-color: #77ff00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 50px;
+    width: 156px;
+    font-size: 22px;
+    font-family: "Lucida Console", Monaco, monospace;
+    position: absolute;
+    right: 20px;
+    top:20px;
+  }
