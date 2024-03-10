@@ -6,6 +6,7 @@ import {
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 import { auth } from "../firebase";
+import "./PerfilPage.css"
 
 const EditProfile = () => {
   const [user, setUser] = useState(null);
@@ -59,9 +60,19 @@ const EditProfile = () => {
 
   return (
     <div>
-      <h1>Editar perfil</h1>
+       <div>
+    <a href="/home">
+    <img
+        className="img"
+        alt="Rectangle"
+        src="https://cdn.animaapp.com/projects/65ebe95db13f1ed0c04d491e/releases/65ebe969fdcccf060bbd37f6/img/rectangle-2@2x.png"
+    />
+    </a>
+    </div>
+      <h1 className="titu-edp">Editar perfil</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="nombre">Nombre:</label>
+        <div className="flex-box">
+        <label htmlFor="nombre" className="subt">Nombre:</label>
         <input
           type="text"
           id="nombre"
@@ -69,7 +80,8 @@ const EditProfile = () => {
           value={profile.nombre}
           onChange={handleChange}
         />
-        <label htmlFor="apellido">Apellido:</label>
+        <br></br>
+        <label className="subt" htmlFor="apellido">Apellido:</label>
         <input
           type="text"
           id="apellido"
@@ -77,14 +89,17 @@ const EditProfile = () => {
           value={profile.apellido}
           onChange={handleChange}
         />
-        <label htmlFor="vjp">Videojuego Preferido:</label>
+        <br></br>
+        <label className="subt" htmlFor="vjp">Videojuego Preferido:</label>
         <select id = "vjp" name = "vjp" value={profile.vjp} onChange={handleChange}>
                 {videojuegos.map((videojuego) => (
                     <option key={videojuego} value={videojuego}>
                     {videojuego}
                     </option>
                 ))}</select>
-        <button type="submit">Guardar cambios</button>
+        <br></br>
+        <button className="bt" type="submit">Guardar cambios</button>
+        </div>
       </form>
     </div>
   );

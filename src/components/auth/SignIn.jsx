@@ -54,10 +54,13 @@ const SignIn  = () => {
                 <input className="campos" type = "password" placeholder = "Ingresa la contraseña" value = {password} onChange = {(e) => setPassword(e.target.value)}></input>
                 <br></br>
                 <button className="bt" type = "submit">Inicia Sesión</button>
+                <br></br>
+
                 </div>
+                
             </form>
-            <br></br>
-            <button className="bt" onClick={signInWithGoogle}>Inicia Sesión con Google</button>
+
+            <button className="bt1" onClick={signInWithGoogle}>Inicia Sesión con Google</button>
         </div>
     );
 };

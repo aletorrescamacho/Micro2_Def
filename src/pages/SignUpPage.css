@@ -1,0 +1,49 @@
+.main-div{
+    display: flex;
+    flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+    top: 20%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 1em;
+}
+
+.p-sincuenta{
+    color: white;
+    font-size: 20px;
+}
+
+.si{
+    padding: 15px 40px;
+    background-color: #77ff00;
+    text-decoration: none;
+    color: #1e3b04;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+.img{
+    height: 103px;
+    left: 2px;
+    top:20px;
+    position: absolute;
+    top: 0;
+    width: 255px
+}
+
+.tit-su{
+    position: absolute;
+    top: 12%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bolder;
+    color: #77ff00;
+}
+
+

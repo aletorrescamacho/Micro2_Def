@@ -12,7 +12,7 @@ return (<div className="Club2Page">
         src="https://cdn.animaapp.com/projects/65ebe95db13f1ed0c04d491e/releases/65ebe969fdcccf060bbd37f6/img/rectangle-2@2x.png"
     />
     </a>
-    <button className="BotonPerfil">Perfil</button>
+
     </div>
     <div className="contenedor-flex">
   <h2 className="titulo-pag">Club de Estrategia</h2>

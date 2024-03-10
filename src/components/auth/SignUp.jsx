@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup  } 
 import { auth } from "../../firebase";
 import { db } from "../../firebase";
 import {doc, setDoc} from "firebase/firestore";
+import "./SignUp.css"
 
 const handleSubmit = async (nombre, apellido, username, email, password, vjp) => {
     try {
@@ -85,14 +86,14 @@ const SignUp  = () => {
     return (
         <div className = "sign-up-container">
             <form onSubmit = {signUp}>
-                <h1>Regístrate y conviértete en un Gamer Élite!</h1>
-                <input type = "text" placeholder = "Ingrese su nombre" value = {name} onChange = {(e) => setName(e.target.value)}></input>
+            <div className="flex-box">
+                <input className="campos" type = "text" placeholder = "Ingrese su nombre" value = {name} onChange = {(e) => setName(e.target.value)}></input>
                 <br></br>
-                <input type = "text" placeholder = "Ingrese su apellido" value = {lastname} onChange = {(e) => setLastname(e.target.value)}></input>
+                <input className="campos" type = "text" placeholder = "Ingrese su apellido" value = {lastname} onChange = {(e) => setLastname(e.target.value)}></input>
                 <br></br>
-                <input type = "text" placeholder = "Ingrese su nombre de usuario" value = {username} onChange = {(e) => setUsername(e.target.value)}></input>
+                <input className="campos" type = "text" placeholder = "Ingrese su nombre de usuario" value = {username} onChange = {(e) => setUsername(e.target.value)}></input>
                 <br></br>
-                <label htmlFor="vjp">Videojuego favorito:</label>
+                <label htmlFor="vjp" className="vjp">Videojuego favorito:</label>
                 <br></br>
                 <select value={vjp} onChange={handleChange}>
                 {videogames.map((game) => (
@@ -102,15 +103,16 @@ const SignUp  = () => {
                 ))}
                 </select>
                 <br></br>
-                <input type = "email" placeholder = "Ingresa el correo electrónico" value = {email} onChange = {(e) => setEmail(e.target.value)}></input>
+                <input className="campos" type = "email" placeholder = "Ingresa el correo electrónico" value = {email} onChange = {(e) => setEmail(e.target.value)}></input>
                 <br></br>
-                <input type = "password" placeholder = "Ingresa la contraseña" value = {password} onChange = {(e) => setPassword(e.target.value)}></input>
+                <input className="campos" type = "password" placeholder = "Ingresa la contraseña" value = {password} onChange = {(e) => setPassword(e.target.value)}></input>
                 <br></br>
-                <button type = "submit">Regístrate</button>
+                <button className="bt" type = "submit">Regístrate</button>
+                <br></br>
+                </div>
             </form>
-            <br></br>
-            <label htmlFor = "registroConGoogle">Regístrate con Google.</label>
-            <button onClick={registerWithGoogle}>Regístrate con Google</button>
+            <button className="bt1" onClick={registerWithGoogle}>Regístrate con Google</button>
+            
         </div>
     );
 };
