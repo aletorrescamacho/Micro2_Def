@@ -12,7 +12,7 @@ const EditProfile = () => {
   const [profile, setProfile] = useState({
     nombre: "",
     apellido: "",
-    videojuegoPreferido: "",
+    vjp: "",
   });
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const EditProfile = () => {
     }
   };
 
-  const videogames = ["The Witcher 3: Wild Hunt", "Red Dead Redemption 2", "The Legend of Zelda: Breath of the Wild", "Dark Souls III", "Super Mario Odyssey", "OverWatch", "Minecraft", "Fortnite", "FIFA 22", "Call of Duty: Warzone", "Assasin's Creed Valhalla", "Cyberpunk 2077", "Among Us", "Animal Crossing: New Horizons", "League of Legends", "Genshin Impact", "Apex Legends", "World of Warcrafts", "Control", "Hades"]
+  const videojuegos = ["The Witcher 3: Wild Hunt", "Red Dead Redemption 2", "The Legend of Zelda: Breath of the Wild", "Dark Souls III", "Super Mario Odyssey", "OverWatch", "Minecraft", "Fortnite", "FIFA 22", "Call of Duty: Warzone", "Assasin's Creed Valhalla", "Cyberpunk 2077", "Among Us", "Animal Crossing: New Horizons", "League of Legends", "Genshin Impact", "Apex Legends", "World of Warcrafts", "Control", "Hades"]
 
   return (
     <div>
@@ -77,11 +77,11 @@ const EditProfile = () => {
           value={profile.apellido}
           onChange={handleChange}
         />
-        <label htmlFor="videojuegoPreferido">Videojuego Preferido:</label>
-        <select value={profile.videojuegoPreferido} onChange={handleChange}>
-                {videogames.map((game) => (
-                    <option key={game} value={game}>
-                    {game}
+        <label htmlFor="vjp">Videojuego Preferido:</label>
+        <select id = "vjp" name = "vjp" value={profile.vjp} onChange={handleChange}>
+                {videojuegos.map((videojuego) => (
+                    <option key={videojuego} value={videojuego}>
+                    {videojuego}
                     </option>
                 ))}</select>
         <button type="submit">Guardar cambios</button>
