@@ -1,0 +1,25 @@
+.titu-edp{
+    position: absolute;
+    top: 12%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 40px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: bolder;
+    color: #77ff00;
+}
+
+.flex-box{
+    display: flex;
+    flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 11%;
+
+}
+
+.subt{
+    color: white;
+    font-size: 20px;
+}

@@ -11,7 +11,6 @@ export default function VideoJuego7(){
                 />
             </a>
 
-                <button className="BotonPerfil">Perfil</button>
 
             </div>
         <div className="container-flex">
