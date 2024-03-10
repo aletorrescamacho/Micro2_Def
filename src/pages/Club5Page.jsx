@@ -86,7 +86,7 @@ return (<div className="Club5Page">
   En la lucha por la supervivencia, no estás solo. Únete a otros supervivientes en una batalla épica contra hordas de no muertos en juegos como Left 4 Dead o Resident Evil. Forja alianzas inquebrantables con tus compañeros, trabajando en equipo para superar obstáculos y afrontar peligros inimaginables. Comparte recursos, estrategias y munición para asegurar la supervivencia del grupo. Experimenta la adrenalina de cada batalla, la tensión constante y la satisfacción de cada victoria contra las fuerzas del mal. </p>
 <div className="botones">
 {user && (
-        <button onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
+        <button className="bt" onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
           {isSubscribed ? "Desuscribirse" : "Suscribirse"}
         </button>
       )}

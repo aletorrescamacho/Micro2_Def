@@ -82,7 +82,7 @@ return (<div className="Club1Page">
 Embárcate en una aventura inolvidable explorando lugares misteriosos y descubriendo tesoros ocultos junto a otros entusiastas. Recorre enigmáticas ruinas, ciudades perdidas y demás escenarios fascinantes mientras descifras enigmas y acertijos que te conducirán a valiosas reliquias, objetos históricos y culturales, o incluso tesoros mágicos. Forja amistades inquebrantables con otros exploradores que comparten tu pasión por la aventura y vive una experiencia única llena de adrenalina, conocimiento y emociones trepidantes.</p>
 <div className="botones">
 {user && (
-        <button onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
+        <button className="bt" onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
           {isSubscribed ? "Desuscribirse" : "Suscribirse"}
         </button>
       )}

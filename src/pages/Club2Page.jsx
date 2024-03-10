@@ -86,7 +86,7 @@ return (<div className="Club2Page">
   En un entorno digital vibrante, donde las ideas se convierten en realidades virtuales, te invitamos a unirte a una comunidad de estrategas brillantes. Forja alianzas con mentes afines, intercambia ideas innovadoras y participa en debates apasionantes. Desarrolla tu ingenio y capacidad de resolución de problemas mientras te enfrentas a enigmas desafiantes y conquistas mundos virtuales. Experimenta la emoción de la colaboración y el logro en un espacio donde la creatividad y la estrategia se unen para dar vida a lo imposible.</p>
 <div className="botones">
 {user && (
-        <button onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
+        <button className="bt" onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
           {isSubscribed ? "Desuscribirse" : "Suscribirse"}
         </button>
       )}

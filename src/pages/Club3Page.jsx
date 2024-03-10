@@ -84,7 +84,7 @@ return (<div className="Club3Page">
   Sumérgete en un universo de posibilidades infinitas en Minecraft. Comparte tus creaciones más originales, desde estructuras majestuosas hasta mecanismos ingeniosos, y da rienda suelta a tu imaginación. Diseña asombrosas obras de arquitectura, desde colosales castillos hasta ciudades futuristas, y deja huella en este mundo virtual. Colabora con otros jugadores en proyectos épicos, uniendo fuerzas para construir maravillas que superen tus expectativas. </p>
 <div className="botones">
 {user && (
-        <button onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
+        <button className="bt" onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
           {isSubscribed ? "Desuscribirse" : "Suscribirse"}
         </button>
       )}

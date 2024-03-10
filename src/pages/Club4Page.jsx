@@ -85,7 +85,7 @@ return (<div className="Club4Page">
 Forma parte de un equipo virtual y vive la emoción de la competición en FIFA 22. Únete a jugadores apasionados por el fútbol y forma un equipo virtual con el que competir en torneos online. Demuestra tus habilidades en el campo, desarrolla estrategias ganadoras y experimenta la adrenalina de la victoria. Comparte la pasión por el fútbol con tus compañeros, celebra los goles y aprende de las derrotas. Forja amistades duraderas y vive la experiencia única de competir en equipo en el mundo virtual de FIFA 22.</p>
 <div className="botones">
 {user && (
-        <button onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
+        <button  className="bt" onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
           {isSubscribed ? "Desuscribirse" : "Suscribirse"}
         </button>
       )}
