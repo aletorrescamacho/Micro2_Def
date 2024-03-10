@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase";
+import {doc, getDoc} from "firebase/firestore";
+import { db } from "../../firebase";
 
 const SignIn  = () => {
     
@@ -17,18 +19,29 @@ const SignIn  = () => {
         });
     }
 
-    const signInWithGoogle = async () => {
-        try {
-          const provider = new GoogleAuthProvider();
-          const result = await signInWithPopup(auth, provider);
-          const user = result.user;
-          console.log(user); 
-      
-          window.location.href = "/home"; 
-        } catch (error) {
-          console.log(error);
-        }
-      };
+
+  const signInWithGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      const userDoc = await getDoc(doc(db, "usuarios", user.uid));
+
+      if (userDoc.exists()) {
+        // Usuario ya está registrado en Firestore, redireccionar a home
+        window.location.href = "/home";
+      } else {
+        // El correo electrónico no está registrado en Firestore, mostrar error
+        window.alert("Error: El correo electrónico no está registrado.");
+      }
+    } catch (error) {
+      console.log(error);
+      window.alert("Error al iniciar sesión con Google.");
+    }
+  };
+
+    
     
     return (
         <div className = "sign-in-container">
