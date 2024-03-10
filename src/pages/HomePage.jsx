@@ -2,7 +2,14 @@
 import "./HomePage.css";
 import { Card } from "../components/Card";
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  getAuth,
+  onAuthStateChanged
+} from "firebase/auth";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { auth } from "../firebase";
 
 export default function HomePage(){
 
@@ -91,8 +98,85 @@ export default function HomePage(){
       }
     };
   
+   const [user, setUser] = useState(null);
+   const [cardsData, setCardsData] = useState([
+    {
+      imgSrc:"https://picsum.photos/id/17/300/200",
+      imgAlt:"Card Image 1",
+      title:"Club de lo Aventureros",
+      description:"Explora lugares misteriosos y descubre tesoros ocultos con otros entusiastas de la aventura.",
+      buttonText:"Ver más",
+      link:"/Club1",
+      subs : "No subscrito",
+      id:"1"
+    
+    },
+    {
+      imgSrc:"https://picsum.photos/id/4/300/200",
+      imgAlt:"Card Image 2",
+      title:"Club de Estrategias",
+      description:"Reúnete con estrategas brillantes para debatir tácticas, resolver enigmas y conquistar mundos virtuales.",
+      buttonText:"Ver más",
+      link:"/Club2",
+      subs : "No subscrito",
+      id:"2"
+    },
+    {
+      imgSrc:"https://picsum.photos/id/43/300/200",
+      imgAlt:"Card Image 3",
+      title:"Club de Constructores",
+      description:"Comparte tus creaciones en Minecraft, diseña estructuras asombrosas y colabora en proyectos épicos.",
+      buttonText:"Ver más",
+      link:"/Club3",
+      subs : "No subscrito",
+      id:"3"
+    },
+    {
+      imgSrc:"https://picsum.photos/id/96/300/200",
+      imgAlt:"Card Image 4",
+      title:"Club de Fútbol Virtual",
+      description:"Forma parte de un equipo virtual, compite en torneos y demuestra tus habilidades en FIFA 22.",
+      buttonText:"Ver más",
+      link:"/Club4",
+      subs : "No subscrito",
+      id:"4"
+    },
+    {
+      imgSrc:"https://picsum.photos/id/156/300/200",
+      imgAlt:"Card Image 5",
+      title:"Club de Cazadores de Zombis",
+      description:"Únete a otros supervivientes en la lucha contra hordas de no muertos en juegos como Left 4 Dead o Resident Evil",
+      buttonText:"Ver más",
+      link:"/Club5",
+      subs : "No subscrito",
+      id:"5"
+    },
+  ]);
 
-
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser);
+  
+        if (currentUser) {
+          const userDoc = doc(db, "usuarios", currentUser.uid);
+          getDoc(userDoc).then((docSnapshot) => {
+            if (docSnapshot.exists()) {
+              const data = docSnapshot.data();
+              const updatedCardsData = cardsData.map((card) => {
+                return {
+                  ...card,
+                  subs: data.suscripciones.includes(card.id) ? "Subscrito" : "No subscrito",
+                };
+              });
+              setCardsData(updatedCardsData);
+            }
+          });
+        }
+      });
+  
+      return unsubscribe;
+    }, []);
+    
 
 
 return (<div className="HomePage">
@@ -120,56 +204,19 @@ return (<div className="HomePage">
                 <p className="p-bus">Recuerda ingresar TODO en minuscula</p>
             </div>
             </div>
-            <Card className="card1"
-                imgSrc="https://picsum.photos/id/17/300/200"
-                imgAlt="Card Image 1"
-                title="Club de lo Aventureros"
-                description="Explora lugares misteriosos y descubre tesoros ocultos con otros entusiastas de la aventura."
-                buttonText="Ver más"
-                link="/Club1"
-                subs = "No subscrito"
-                id="1"
-                />
-            <Card className="card2"
-                imgSrc="https://picsum.photos/id/4/300/200"
-                imgAlt="Card Image 2"
-                title="Club de   Estrategias"
-                description="Reúnete con estrategas brillantes para debatir tácticas, resolver enigmas y conquistar mundos virtuales."
-                buttonText="Ver más"
-                link="/Club2"
-                subs = "No subscrito"
-                id="2"
-            />
-            <Card className="card3"
-            imgSrc="https://picsum.photos/id/43/300/200"
-            imgAlt="Card Image 3"
-            title="Club de Constructores"
-            description="Comparte tus creaciones en Minecraft, diseña estructuras asombrosas y colabora en proyectos épicos."
-            buttonText="Ver más"
-            link="/Club3"
-            subs = "No subscrito"
-            id="3"
-            />
-            <Card className="card4"
-            imgSrc="https://picsum.photos/id/96/300/200"
-            imgAlt="Card Image 4"
-            title="Club de Fútbol Virtual"
-            description="Forma parte de un equipo virtual, compite en torneos y demuestra tus habilidades en FIFA 22."
-            buttonText="Ver más"
-            link="/Club4"
-            subs = "No subscrito"
-            id="4"
-            />
-            <Card className="card5"
-            imgSrc="https://picsum.photos/id/156/300/200"
-            imgAlt="Card Image 5"
-            title="Club de Cazadores de Zombis"
-            description="Únete a otros supervivientes en la lucha contra hordas de no muertos en juegos como Left 4 Dead o Resident Evil"
-            buttonText="Ver más"
-            link="/Club5"
-            subs = "No subscrito"
-            id="5"
-            />
+            {cardsData.map((card) => (
+              <Card
+                key={card.id}
+                className="card5"
+                imgSrc={card.imgSrc}
+                imgAlt={card.imgAlt}
+                title={card.title}
+                description={card.description}
+                buttonText={card.buttonText}
+                link={card.link}
+                subs={card.subs}
+              />
+      ))}
             
         </div>
     </div>
