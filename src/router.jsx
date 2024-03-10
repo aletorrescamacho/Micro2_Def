@@ -8,6 +8,7 @@ import Club3Page from "./pages/Club3Page";
 import Club4Page from "./pages/Club4Page";
 import Club5Page from "./pages/Club5Page";
 import PruebaBusqueda from "./pages/PruebaBusqueda";
+import EditProfile from "./pages/PeriflPage";
 
 
 export const router = createBrowserRouter([{
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([{
 {
     path: "/SignUp",
     element: <SignUpPage/>
+},
+{
+    path: "/Perfil",
+    element: <EditProfile/>
 },
 {
     path: "/Club1",
