@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 
 import { auth } from "../../firebase";
 import {doc, getDoc} from "firebase/firestore";
 import { db } from "../../firebase";
+import "./SignIn.css"
 
 const SignIn  = () => {
     
@@ -45,17 +46,18 @@ const SignIn  = () => {
     
     return (
         <div className = "sign-in-container">
+          
             <form onSubmit = {signIn}>
-                <h1>Inicia Sesión</h1>
-                <input type = "email" placeholder = "Ingresa el correo electrónico" value = {email} onChange = {(e) => setEmail(e.target.value)}></input>
+              <div className="flex-box">
+                <input className="campos" type = "email" placeholder = "Ingresa el correo electrónico" value = {email} onChange = {(e) => setEmail(e.target.value)}></input>
                 <br></br>
-                <input type = "password" placeholder = "Ingresa la contraseña" value = {password} onChange = {(e) => setPassword(e.target.value)}></input>
+                <input className="campos" type = "password" placeholder = "Ingresa la contraseña" value = {password} onChange = {(e) => setPassword(e.target.value)}></input>
                 <br></br>
-                <button type = "submit">Inicia Sesión</button>
+                <button className="bt" type = "submit">Inicia Sesión</button>
+                </div>
             </form>
             <br></br>
-            <label htmlFor = "sesionConGoogle">Inicia Sesión con Google.</label>
-            <button onClick={signInWithGoogle}>Inicia Sesión con Google</button>
+            <button className="bt" onClick={signInWithGoogle}>Inicia Sesión con Google</button>
         </div>
     );
 };
