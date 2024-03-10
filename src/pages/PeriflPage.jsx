@@ -73,6 +73,7 @@ const EditProfile = () => {
       <form onSubmit={handleSubmit}>
         <div className="flex-box">
         <label htmlFor="nombre" className="subt">Nombre:</label>
+        <br></br>
         <input
           type="text"
           id="nombre"
@@ -81,7 +82,9 @@ const EditProfile = () => {
           onChange={handleChange}
         />
         <br></br>
+        <br></br>
         <label className="subt" htmlFor="apellido">Apellido:</label>
+        <br></br>
         <input
           type="text"
           id="apellido"
@@ -90,13 +93,16 @@ const EditProfile = () => {
           onChange={handleChange}
         />
         <br></br>
+        <br></br>
         <label className="subt" htmlFor="vjp">Videojuego Preferido:</label>
+        <br></br>
         <select id = "vjp" name = "vjp" value={profile.vjp} onChange={handleChange}>
                 {videojuegos.map((videojuego) => (
                     <option key={videojuego} value={videojuego}>
                     {videojuego}
                     </option>
                 ))}</select>
+        <br></br>
         <br></br>
         <button className="bt" type="submit">Guardar cambios</button>
         </div>
