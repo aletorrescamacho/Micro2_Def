@@ -17,25 +17,77 @@ export default function HomePage(){
   
     const handleSubmit = (event) => {
       event.preventDefault();
-      window.alert(`Guardando la búsqueda: "${busqueda}"`)
-      console.log(`Guardando la búsqueda: "${busqueda}"`);
-      
+
   
       // Puedes realizar otras acciones aquí, como enviar la búsqueda a una API
     };
   
     const navigate = useNavigate();
-  
     const handleButtonClick = () => {
       switch (busqueda) {
-        case 'valor1':
-          navigate("/Club1")
+        case 'the witcher 3: wild hunt':
+          navigate("/VideoJuego1")
           break;
-        case 'valor2':
-          navigate("/Club2")
+        case 'red dead redemption 2':
+          navigate("/VideoJuego2")
           break;
+        case 'the legend of zelda: breath of the wild':
+            navigate("/VideoJuego3")
+            break;
+        case 'dark souls iii':
+            navigate("/VideoJuego4")
+            break;
+        case 'super mario odyssey':
+          navigate("/VideoJuego5")
+          break;
+        case 'overwatch':
+          navigate("/VideoJuego6")
+          break;
+        case 'minecraft':
+          navigate("/VideoJuego7")
+          break;
+        case 'fortnite':
+          navigate("/VideoJuego8")
+          break;
+        case 'fifa 22':
+          navigate("/VideoJuego9")
+          break;
+        case 'call of duty: warzone':
+          navigate("/VideoJuego10")
+          break;
+        case "assassin's creed valhalla":
+          navigate("/VideoJuego11")
+          break;
+        case 'cyberpunk 2077':
+          navigate("/VideoJuego12")
+          break;
+        case 'among us':
+          navigate("/VideoJuego13")
+          break;
+        case 'animal crossing: new horizons':
+          navigate("/VideoJuego14")
+          break;
+        case 'league of legends':
+          navigate("/VideoJuego15")
+          break;
+        case 'genshin impact':
+          navigate("/VideoJuego16")
+          break;
+        case 'apex legends':
+          navigate("/VideoJuego17")
+          break;
+        case 'world of warcraft':
+          navigate("/VideoJuego18")
+          break;
+        case 'control':
+          navigate("/VideoJuego19")
+          break;
+        case 'hades':
+          navigate("/VideoJuego20")
+          break;
+        
         default:
-          navigate("/Club3")
+          navigate("/VideoJuegoError")
       }
     };
   
@@ -65,6 +117,7 @@ return (<div className="HomePage">
                     <button type="submit" onClick={handleButtonClick}>Buscar</button>
                 </form>
                 <p className="p-bus">¡Busca aquí todos tus juegos favoritos!</p>
+                <p className="p-bus">Recuerda ingresar TODO en minuscula</p>
             </div>
             </div>
             <Card className="card1"
