@@ -24,7 +24,7 @@ function PruebaBusqueda() {
   const handleButtonClick = () => {
     switch (busqueda) {
       case 'valor1':
-        navigate("/Club1")
+        navigate("/VideoJuego1")
         break;
       case 'valor2':
         navigate("/Club2")

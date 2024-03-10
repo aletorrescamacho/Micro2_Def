@@ -1,0 +1,24 @@
+.img-v{
+    width: 300px;
+    height: 300px;
+}
+
+.container-flex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em;
+    width: fit-content;
+    margin-top: 80px;
+    margin-left: auto;
+  margin-right: auto;
+}
+
+.title-Juego{
+    color: white;
+}
+
+.parrafo-v{
+    color: white;
+    font-size: 18px;
+}
