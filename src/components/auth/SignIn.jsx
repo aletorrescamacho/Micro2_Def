@@ -38,7 +38,6 @@ const SignIn  = () => {
       }
     } catch (error) {
       console.log(error);
-      window.alert("Error al iniciar sesión con Google.");
     }
   };
 

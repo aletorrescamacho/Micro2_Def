@@ -1,8 +1,72 @@
 import "./Club1Page.css";
 import { VideoCard } from "../components/VideoCard";
+import React, { useState, useEffect } from 'react';
+import {
+  getAuth,
+  onAuthStateChanged
+} from "firebase/auth";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { auth } from "../firebase";
 
 
 export default function Club4Page(){
+
+  const [user, setUser] = useState(null);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [suscripciones, setSuscripciones] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+
+      if (currentUser) {
+        const userDoc = doc(db, "usuarios", currentUser.uid);
+        getDoc(userDoc).then((docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const data = docSnapshot.data();
+            checkSubscription("4", data.suscripciones);
+          }
+        });
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  function checkSubscription(clubId, suscripciones) {
+    setIsSubscribed(suscripciones.includes("4"));
+  }
+
+  async function handleSubscribe() {
+    const userDocRef = doc(db, "usuarios", user.uid);
+    const userDoc = await getDoc(userDocRef);
+    const data = userDoc.data();
+    const suscripciones = data.suscripciones;
+
+    
+    if (!suscripciones.includes("4")) {
+      await updateDoc(userDocRef, {
+        suscripciones: [...suscripciones, "4"], 
+      });
+      setIsSubscribed(true);
+    }
+  }
+
+  async function handleUnsubscribe() {
+    const userDocRef = doc(db, "usuarios", user.uid);
+    const userDoc = await getDoc(userDocRef);
+    const data = userDoc.data();
+    const suscripciones = data.suscripciones;
+
+
+    const updatedSuscripciones = suscripciones.filter((id) => id !== "4");
+    await updateDoc(userDocRef, {
+      suscripciones: updatedSuscripciones,
+    });
+    setIsSubscribed(false);
+  }
+
 return (<div className="Club4Page">
         <div>
     <a href="/home">
@@ -20,8 +84,11 @@ return (<div className="Club4Page">
   <p className="pa">
 Forma parte de un equipo virtual y vive la emoción de la competición en FIFA 22. Únete a jugadores apasionados por el fútbol y forma un equipo virtual con el que competir en torneos online. Demuestra tus habilidades en el campo, desarrolla estrategias ganadoras y experimenta la adrenalina de la victoria. Comparte la pasión por el fútbol con tus compañeros, celebra los goles y aprende de las derrotas. Forja amistades duraderas y vive la experiencia única de competir en equipo en el mundo virtual de FIFA 22.</p>
 <div className="botones">
-    <button className="ba">Subscribirse</button>
-    <button className="ba">Retirarse</button>
+{user && (
+        <button onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
+          {isSubscribed ? "Desuscribirse" : "Suscribirse"}
+        </button>
+      )}
   </div>
   <div className="div-videojuegos">
     <h2 className="t-videojuego">Videojuegos:</h2>

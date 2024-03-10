@@ -165,7 +165,7 @@ export default function HomePage(){
               const updatedCardsData = cardsData.map((card) => {
                 return {
                   ...card,
-                  subs: data.suscripciones.includes(card.id) ? "Subscrito" : "No subscrito",
+                  subs: data.suscripciones.includes(card.id) ? "Suscrito" : "No suscrito",
                 };
               });
               setCardsData(updatedCardsData);

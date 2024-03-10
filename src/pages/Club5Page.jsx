@@ -1,8 +1,73 @@
 import "./Club1Page.css";
 import { VideoCard } from "../components/VideoCard";
-
+import React, { useState, useEffect } from 'react';
+import {
+  getAuth,
+  onAuthStateChanged
+} from "firebase/auth";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { auth } from "../firebase";
 
 export default function Club5Page(){
+
+  const [user, setUser] = useState(null);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [suscripciones, setSuscripciones] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+
+      if (currentUser) {
+        const userDoc = doc(db, "usuarios", currentUser.uid);
+        getDoc(userDoc).then((docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const data = docSnapshot.data();
+            checkSubscription("5", data.suscripciones);
+          }
+        });
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  function checkSubscription(clubId, suscripciones) {
+    setIsSubscribed(suscripciones.includes("5"));
+  }
+
+  async function handleSubscribe() {
+    const userDocRef = doc(db, "usuarios", user.uid);
+    const userDoc = await getDoc(userDocRef);
+    const data = userDoc.data();
+    const suscripciones = data.suscripciones;
+
+    
+    if (!suscripciones.includes("5")) {
+      await updateDoc(userDocRef, {
+        suscripciones: [...suscripciones, "5"], 
+      });
+      setIsSubscribed(true);
+    }
+  }
+
+  async function handleUnsubscribe() {
+    const userDocRef = doc(db, "usuarios", user.uid);
+    const userDoc = await getDoc(userDocRef);
+    const data = userDoc.data();
+    const suscripciones = data.suscripciones;
+
+  
+    const updatedSuscripciones = suscripciones.filter((id) => id !== "5");
+    await updateDoc(userDocRef, {
+      suscripciones: updatedSuscripciones,
+    });
+    setIsSubscribed(false);
+  }
+
+
+
 return (<div className="Club5Page">
         <div>
     <a href="/home">
@@ -20,8 +85,11 @@ return (<div className="Club5Page">
   <p className="pa">
   En la lucha por la supervivencia, no estás solo. Únete a otros supervivientes en una batalla épica contra hordas de no muertos en juegos como Left 4 Dead o Resident Evil. Forja alianzas inquebrantables con tus compañeros, trabajando en equipo para superar obstáculos y afrontar peligros inimaginables. Comparte recursos, estrategias y munición para asegurar la supervivencia del grupo. Experimenta la adrenalina de cada batalla, la tensión constante y la satisfacción de cada victoria contra las fuerzas del mal. </p>
 <div className="botones">
-    <button className="ba">Subscribirse</button>
-    <button className="ba">Retirarse</button>
+{user && (
+        <button onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
+          {isSubscribed ? "Desuscribirse" : "Suscribirse"}
+        </button>
+      )}
   </div>
   <div className="div-videojuegos">
     <h2 className="t-videojuego">Videojuegos:</h2>

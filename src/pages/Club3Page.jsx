@@ -1,8 +1,72 @@
 import "./Club1Page.css";
 import { VideoCard } from "../components/VideoCard";
+import React, { useState, useEffect } from 'react';
+import {
+  getAuth,
+  onAuthStateChanged
+} from "firebase/auth";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+import { auth } from "../firebase";
+
 
 
 export default function Club3Page(){
+
+  const [user, setUser] = useState(null);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [suscripciones, setSuscripciones] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+
+      if (currentUser) {
+        const userDoc = doc(db, "usuarios", currentUser.uid);
+        getDoc(userDoc).then((docSnapshot) => {
+          if (docSnapshot.exists()) {
+            const data = docSnapshot.data();
+            checkSubscription("3", data.suscripciones); 
+          }
+        });
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+  function checkSubscription(clubId, suscripciones) {
+    setIsSubscribed(suscripciones.includes("3")); 
+  }
+
+  async function handleSubscribe() {
+    const userDocRef = doc(db, "usuarios", user.uid);
+    const userDoc = await getDoc(userDocRef);
+    const data = userDoc.data();
+    const suscripciones = data.suscripciones;
+
+    if (!suscripciones.includes("3")) {
+      await updateDoc(userDocRef, {
+        suscripciones: [...suscripciones, "3"],
+      });
+      setIsSubscribed(true);
+    }
+  }
+
+  async function handleUnsubscribe() {
+    const userDocRef = doc(db, "usuarios", user.uid);
+    const userDoc = await getDoc(userDocRef);
+    const data = userDoc.data();
+    const suscripciones = data.suscripciones;
+
+    const updatedSuscripciones = suscripciones.filter((id) => id !== "3");
+    await updateDoc(userDocRef, {
+      suscripciones: updatedSuscripciones,
+    });
+    setIsSubscribed(false);
+  }
+
+
 return (<div className="Club3Page">
         <div>
     <a href="/home">
@@ -20,8 +84,11 @@ return (<div className="Club3Page">
   <p className="pa">
   Sumérgete en un universo de posibilidades infinitas en Minecraft. Comparte tus creaciones más originales, desde estructuras majestuosas hasta mecanismos ingeniosos, y da rienda suelta a tu imaginación. Diseña asombrosas obras de arquitectura, desde colosales castillos hasta ciudades futuristas, y deja huella en este mundo virtual. Colabora con otros jugadores en proyectos épicos, uniendo fuerzas para construir maravillas que superen tus expectativas. </p>
 <div className="botones">
-    <button className="ba">Subscribirse</button>
-    <button className="ba">Retirarse</button>
+{user && (
+        <button onClick={isSubscribed ? handleUnsubscribe : handleSubscribe}>
+          {isSubscribed ? "Desuscribirse" : "Suscribirse"}
+        </button>
+      )}
   </div>
   <div className="div-videojuegos">
     <h2 className="t-videojuego">Videojuegos:</h2>
